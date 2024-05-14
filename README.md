@@ -1,6 +1,6 @@
 # CSTNet for RGB-T Tracking
 
-Our manuscript is available at [arxiv]()
+Our manuscript is available at [arxiv](https://arxiv.org/abs/2405.03177)
 
 ## Environment Installation
 
