@@ -1,0 +1,2 @@
+from .vit_rgbt_registry import vit_base_patch16_224_rgbt_register
+from .center_head import center_head
