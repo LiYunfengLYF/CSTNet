@@ -48,14 +48,16 @@ See lib/train/train_script.py and  lib/train/actor/cstnet_actor.py
 
 
 ## Evaluation
+Download [checkpoint](https://drive.google.com/file/d/1ybQorlpP-BQgsPAfJ-uGOJu_J_v42FUq/view?usp=drive_link) and put it under `$PROJECT_ROOT$/output`.
 
 ```
-python tracking/test.py cstnet baseline --dataset_name lasher_test --threads 4 --num_gpus 1
-
-python tracking/analysis_results.py --tracker_name cstnet --tracker_param baseline --dataset_name lasher
+python tracking/test.py cstnet baseline --dataset_name lasher --threads 4 --num_gpus 1
 ```
+Download [lasher raw result](https://drive.google.com/file/d/1I9wcCHfTBBcebXYOGU_-jHKs7gWP0VMY/view?usp=sharing) and put it under `$PROJECT_ROOT$/output`.
 
-
+```
+python tracking/analysis_results.py
+```
 ## Acknowledgments
 Our project is developed upon [TBSI](https://github.com/RyanHTR/TBSI). Thanks for their contributions which help us to quickly implement our ideas.
 
