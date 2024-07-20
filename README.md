@@ -1,6 +1,9 @@
 # CSTNet for RGB-T Tracking
 
-Our manuscript is available at [arxiv](https://arxiv.org/abs/2405.03177)
+## News:
+
+- 20 7 2024: Onnx version CSTNet and smaller version CSTNet-small is upload. The checkpoints will be released soon.
+- 6 5 2024: Our manuscript is available at [arxiv](https://arxiv.org/abs/2405.03177)
 
 ## Environment Installation
 

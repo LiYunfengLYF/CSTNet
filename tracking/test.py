@@ -11,7 +11,12 @@ from lib.test.evaluation import get_dataset
 from lib.test.evaluation.running import run_dataset
 from lib.test.evaluation.tracker import Tracker
 
+'''
 
+python tracking/test.py --script cstnet --config small --dataset vtuavst --threads 0 --num_gpus 1 --debug 1 --env_num 102
+
+
+'''
 def run_tracker(tracker_name, tracker_param, run_id=None, dataset_name='otb', sequence=None, debug=0,
                 threads=0, num_gpus=8, env_num=0):
     """Run tracker on sequence or dataset.

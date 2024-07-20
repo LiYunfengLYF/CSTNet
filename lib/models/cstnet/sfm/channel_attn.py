@@ -22,8 +22,17 @@ class CrossAttention(nn.Module):
         q1 = self.q1(x1).reshape(B, -1, self.num_heads, C // self.num_heads).permute(0, 2, 1, 3).contiguous()
         q2 = self.q2(x2).reshape(B, -1, self.num_heads, C // self.num_heads).permute(0, 2, 1, 3).contiguous()
 
-        k1, v1 = self.kv1(x1).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).contiguous()
-        k2, v2 = self.kv2(x2).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).contiguous()
+        # k1, v1 = self.kv1(x1).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).contiguous()
+        # k2, v2 = self.kv2(x2).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).contiguous()
+        k1, v1 = self.kv1(x1).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).chunk(2,
+                                                                                                                  dim=0)
+        k2, v2 = self.kv2(x2).reshape(B, -1, 2, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4).chunk(2,
+                                                                                                                  dim=0)
+        k1 = k1.squeeze(dim=0)
+        k2 = k2.squeeze(dim=0)
+        v1 = v1.squeeze(dim=0)
+        v2 = v2.squeeze(dim=0)
+
 
         ctx1 = (k1.transpose(-2, -1) @ v1) * self.scale
         ctx1 = ctx1.softmax(dim=-2)

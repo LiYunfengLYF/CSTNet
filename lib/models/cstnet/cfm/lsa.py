@@ -18,10 +18,12 @@ class CB11(nn.Module):
         x = self.bn(self.pwconv(x))
         return x.flatten(2).transpose(1, 2).contiguous()
 
+
 class DWC(nn.Module):
-    def __init__(self, dim, kernel):
+    def __init__(self, dim, kernel, padding):
         super().__init__()
-        self.dwconv = nn.Conv2d(dim, dim, kernel, 1, padding='same', groups=dim)
+        # self.dwconv = nn.Conv2d(dim, dim, kernel, 1, padding='same', groups=dim)
+        self.dwconv = nn.Conv2d(dim, dim, kernel, 1, padding=padding, groups=dim)
 
         # Apply Kaiming initialization with fan-in to the dwconv layer
         init.kaiming_normal_(self.dwconv.weight, mode='fan_in', nonlinearity='relu')
@@ -38,9 +40,9 @@ class LSA(nn.Module):
         super().__init__()
         self.fc1 = nn.Linear(c1, c2)
         self.pwconv1 = CB11(c2)
-        self.dwconv3 = DWC(c2, 3)
-        self.dwconv5 = DWC(c2, 5)
-        self.dwconv7 = DWC(c2, 7)
+        self.dwconv3 = DWC(c2, 3, 1)
+        self.dwconv5 = DWC(c2, 5, 2)
+        self.dwconv7 = DWC(c2, 7, 3)
         self.pwconv2 = CB11(c2)
         self.fc2 = nn.Linear(c2, c1)
 
@@ -48,7 +50,7 @@ class LSA(nn.Module):
         init.kaiming_normal_(self.fc1.weight, mode='fan_in', nonlinearity='relu')
         init.kaiming_normal_(self.fc2.weight, mode='fan_in', nonlinearity='relu')
 
-    def forward(self, x, H, W) :
+    def forward(self, x, H, W):
         x = self.fc1(x)
         x = self.pwconv1(x, H, W)
         x1 = self.dwconv3(x, H, W)

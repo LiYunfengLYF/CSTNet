@@ -38,7 +38,7 @@ DATA:
       - 1
     SAMPLE_PER_EPOCH: 10000
 MODEL:
-  NETWORK: CSTNet
+  NETWORK: CSTNet_onnx
   BACKBONE:
     TYPE: vit_base_patch16_224_rgbt_register
     STRIDE: 16

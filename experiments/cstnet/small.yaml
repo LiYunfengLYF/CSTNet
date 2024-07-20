@@ -46,7 +46,7 @@ MODEL:
     LOAD_MODE: 1
     PARAMS:
       pretrained: False
-      rgbt_loc: [ 3, 6, 9 ]
+      rgbt_loc: [ ]
       freeze_layer: []
     SEP_SEG: False
     CAT_MODE: 'direct'
@@ -75,7 +75,7 @@ TRAIN:
     TYPE: 'CSTNet_Actor'
   PRETRAIN:
     SOT_MODEL: True
-    SOT_PRETRAIN_FILE: 'TBSITrack_ep0015.pth.tar' # "OSTrack_ep0300.pth.tar"
+    SOT_PRETRAIN_FILE: 'CSTNet_ep0020.pth.tar' # "OSTrack_ep0300.pth.tar"
   OPTIMIZER:
     TYPE: ADAMW
     DECAY_RATE: 0.1

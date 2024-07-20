@@ -9,15 +9,15 @@ from lib.models.cstnet.trackerModel_ar_vit import TRACKER_REGISTRY
 from lib.utils.load import load_yaml
 
 model_name = r'cstnet'
-yaml_name = r'baseline'
+yaml_name = r'small'
 
 cfg = load_yaml(rf'E:\code\CSTNet\experiments/{model_name}/{yaml_name}.yaml')
-model = TRACKER_REGISTRY.get(cfg.MODEL.NETWORK)(cfg, env_num=101, training=True)
+model = TRACKER_REGISTRY.get(cfg.MODEL.NETWORK)(cfg, env_num=101, training=True).cuda()
 
-model.load_state_dict(torch.load(r'E:\code\CSTNet\output\checkpoints\train\cstnet\baseline\CSTNet_ep0020.pth.tar')['net'])
+model.load_state_dict(torch.load(rf'E:\code\CSTNet\output\checkpoints\train\cstnet\{yaml_name}\CSTNet_ep0015.pth.tar')['net'])
 
-z = torch.rand(1, 3, 128, 128)
-x = torch.rand(1, 3, 256, 256)
+z = torch.rand(1, 3, 128, 128).cuda()
+x = torch.rand(1, 3, 256, 256).cuda()
 input = ([z, z], [x, x])
 
 
@@ -29,11 +29,11 @@ with torch.no_grad():
     print('overall params is ', params)
 
 
-
+#
 # avg_time = []
-# for i in range(5):
+# for i in range(3):
 #     tim = []
-#     for i in range(1000):
+#     for i in range(100):
 #         s = time.time()
 #         with torch.no_grad():
 #             out = model([z, z],[x, x])

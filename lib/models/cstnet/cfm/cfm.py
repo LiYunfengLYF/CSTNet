@@ -41,7 +41,7 @@ class GIM(nn.Module):
 
     def forward(self, x_v, x_i):
         B, C, H, W = x_v.shape
-        N = int(H * W)
+        N = H * W
 
         x_v = patch2token(x_v)
         x_i = patch2token(x_i)
