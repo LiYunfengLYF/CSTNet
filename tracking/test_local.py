@@ -48,7 +48,6 @@ def main():
     ]
 
     dataset_list = [
-        # {'name': 'rgbt234'},
         {'name': 'lasher'}
     ]
 
