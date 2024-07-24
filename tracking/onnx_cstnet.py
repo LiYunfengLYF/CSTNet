@@ -14,7 +14,7 @@ from lib.models.cstnet.trackerModel_ar_vit import TRACKER_REGISTRY
 from lib.utils.load import load_yaml
 
 model_name = r'cstnet_onnx'
-yaml_name = r'small_onnx'
+yaml_name = r'baseline_onnx'
 
 cfg = load_yaml(rf'E:\code\CSTNet\experiments/{model_name}/{yaml_name}.yaml')
 torch_model = TRACKER_REGISTRY.get(cfg.MODEL.NETWORK)(cfg, env_num=101, training=True)
@@ -68,30 +68,30 @@ t_ort = 0  # onnxruntime time
 N = 1000
 order = 0
 
-for input_meta in ort_session.get_inputs():
-    print(f"输入名称: {input_meta.name}, 形状: {input_meta.shape}")
-
-for i in range(N):
-    # generate data
-    img_z1 = to_numpy(torch.rand(1, 3, 128, 128))
-    img_z2 = to_numpy(torch.rand(1, 3, 128, 128))
-    img_x1 = to_numpy(torch.rand(1, 3, 256, 256))
-    img_x2 = to_numpy(torch.rand(1, 3, 256, 256))
-    # onnx inference
-    ort_inputs = {'img_z1': img_z1,
-                  'img_z2': img_z2,
-                  'img_x1': img_x1,
-                  'img_x2': img_x2,
-                  }
-    s_ort = time.time()
-    ort_outs = ort_session.run(None, ort_inputs)
-    e_ort = time.time()
-    if N < 1:
-        continue
-    order = order + 1
-    lat_ort = e_ort - s_ort
-    t_ort += lat_ort
-
-    # print("onnxruntime latency: %.2fms" % (lat_ort * 1000))
-print("pytorch model average latency", t_pyt / order * 1000)
-print("onnx model average latency:", t_ort / order * 1000)
+# for input_meta in ort_session.get_inputs():
+#     print(f"输入名称: {input_meta.name}, 形状: {input_meta.shape}")
+#
+# for i in range(N):
+#     # generate data
+#     img_z1 = to_numpy(torch.rand(1, 3, 128, 128))
+#     img_z2 = to_numpy(torch.rand(1, 3, 128, 128))
+#     img_x1 = to_numpy(torch.rand(1, 3, 256, 256))
+#     img_x2 = to_numpy(torch.rand(1, 3, 256, 256))
+#     # onnx inference
+#     ort_inputs = {'img_z1': img_z1,
+#                   'img_z2': img_z2,
+#                   'img_x1': img_x1,
+#                   'img_x2': img_x2,
+#                   }
+#     s_ort = time.time()
+#     ort_outs = ort_session.run(None, ort_inputs)
+#     e_ort = time.time()
+#     if N < 1:
+#         continue
+#     order = order + 1
+#     lat_ort = e_ort - s_ort
+#     t_ort += lat_ort
+#
+#     # print("onnxruntime latency: %.2fms" % (lat_ort * 1000))
+# print("pytorch model average latency", t_pyt / order * 1000)
+# print("onnx model average latency:", t_ort / order * 1000)

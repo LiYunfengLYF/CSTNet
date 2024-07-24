@@ -1,7 +1,7 @@
 # CSTNet for RGB-T Tracking
 
 ## News:
-
+- 24 7 2024: Onnx version CSTNet and smaller version checkpoints are released.
 - 20 7 2024: Onnx version CSTNet and smaller version CSTNet-small is upload. The checkpoints will be released soon.
 - 06 5 2024: Our manuscript is available at [arxiv](https://arxiv.org/abs/2405.03177)
 
@@ -51,12 +51,12 @@ See lib/train/train_script.py and  lib/train/actor/cstnet_actor.py
 
 
 ## Evaluation
-Download [checkpoint](https://drive.google.com/file/d/1ybQorlpP-BQgsPAfJ-uGOJu_J_v42FUq/view?usp=drive_link) and put it under `$PROJECT_ROOT$/output`.
+Download [checkpoint](https://drive.google.com/drive/folders/1hum-MVs7Jwimmk6w8WRGZftsp4jr5TUo?usp=sharing) and put it under `$PROJECT_ROOT$/output`.
 
 ```
 python tracking/test.py cstnet baseline --dataset_name lasher --threads 4 --num_gpus 1
 ```
-Download [lasher raw result](https://drive.google.com/file/d/1I9wcCHfTBBcebXYOGU_-jHKs7gWP0VMY/view?usp=sharing) and put it under `$PROJECT_ROOT$/output`.
+Download [raw result](https://drive.google.com/file/d/1BYMD4ZJOaljmQS3vjOgntzmqg5fqsVlv/view?usp=drive_link) and put it under `$PROJECT_ROOT$/output`.
 
 ```
 python tracking/analysis_results.py
